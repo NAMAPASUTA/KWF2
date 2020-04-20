@@ -1,0 +1,6 @@
+applications:
+  - name: KWF
+    random-route: true
+    memory: 256M
+    command: python app.py
+    path: .
