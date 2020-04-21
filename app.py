@@ -1,3 +1,4 @@
+# this is dev version 
 from flask import Flask, request, abort
 import os
 import requests as req
@@ -16,9 +17,9 @@ app = Flask(__name__)
 
 # Channel access token
 line_bot_api = LineBotApi(
-    'zgW1wEtAubajZjQDsT770MZ4pLQBL9Xn4lrP9ctKXVsDQaxpw1OH/VD006yTt1CEphSTCRRNGFWqTLD45mxgy5LX7q0mehDvgoXjWthyBmMA5d5sZG22pWAjosPReY9yU0teURCQoZ9mqrI3jU2VuAdB04t89/1O/w1cDnyilFU=')
+    'lFFTPplcOzcxX7wxfcSkU0ynxMpfI5WWog81SJu8XUC9KMVNaFiuStL4HN+F8O1wHRQTsGRUChKBrWjLzDOQ3mxAxBsK81PXQhQYViio72/uVCqDWWAVc1zpsgL5q9AtO0gna3mHBrWjJL8w7OqEGgdB04t89/1O/w1cDnyilFU=')
 # Channel secret
-handler = WebhookHandler('72c9c0e84f7427b4393262978756fe6b')
+handler = WebhookHandler('1c5d174f5f7da4a50680c7073a9c4d89')
 
 @app.route("/bot/webhook", methods=['POST'])
 def callback():
