@@ -49,7 +49,7 @@ def handler_message(event):
 # 新しく参加したユーザに特定のメッセージを送信
 @handler.add(MemberJoinedEvent)
 def handler_message(event:Event):
-    joined_users = event.joined.members.json()
+    joined_users = event.joined.members[0]
     # joined_user = str(req.get(f"https://api.line.me/v2/bot/profile/{joined_user_id}")) # 参加したメンバーのユーザ名を取得
     line_bot_api.reply_message(
         event.reply_token,
