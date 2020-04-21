@@ -1,6 +1,6 @@
 applications:
   - name: KWF2
     random-route: true
-    memory: 256M
+    memory: 128M
     command: python app.py
     path: .
