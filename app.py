@@ -49,12 +49,13 @@ def handler_message(event):
 # 新しく参加したユーザに特定のメッセージを送信
 @handler.add(MemberJoinedEvent)
 def handler_message(event:Event):
-    joined_user = dict(event.joined.members[0]) # 参加したメンバーのデータ
-    user_id = joined_user['userId'] # IDを取り出す
-    # user_name = str(req.get(f"https://api.line.me/v2/bot/profile/{joined_user_id}")) # 参加したメンバーのユーザ名を取得
+    joined_user = event.joined.members[0] # 参加したメンバーのデータ
+    # user_id = dict(joined_user)['userId'] # IDを取り出す
+    # user_prof = req.get("https://api.line.me/v2/bot/profile/"+) # 参加したメンバーのユーザ名を取得
+    # user_name = (user_prof.json())['displayName']
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=f"ようこそこの世界へ、僕たちは君を歓迎しよう @{str(user_id)}")
+        TextSendMessage(text=f"ようこそこの世界へ、僕たちは君を歓迎しよう {joined_user} {type(joined_user)}")
     )
 
 
