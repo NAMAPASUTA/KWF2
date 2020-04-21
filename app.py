@@ -58,7 +58,7 @@ def handler_message(event:Event):
     # user_name = user_prof['displayName'] # ユーザ名を取り出す
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=f"{str(user_prof.display_name)}さん ようこそこの学校の光へ、僕たちは君を歓迎しよう")
+        TextSendMessage(text=f"{str(user_prof.display_name)}さん\nようこそこの学校の光へ、僕たちは君を歓迎しよう")
     )
 
 
