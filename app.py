@@ -38,13 +38,6 @@ def callback():
     return 'OK'
 
 # handlerにオプションを付加して処理を付け加える
-# オウム返し
-@handler.add(MessageEvent, message=TextMessage)
-def handler_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text)
-    )
 
 # 新しく参加したユーザに特定のメッセージを送信
 @handler.add(MemberJoinedEvent)
