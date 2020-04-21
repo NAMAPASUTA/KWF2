@@ -50,12 +50,12 @@ def handler_message(event):
 @handler.add(MemberJoinedEvent)
 def handler_message(event:Event):
     joined_user = event.joined.members[0] # 参加したメンバーのデータ
-    # user_id = dict(joined_user)['userId'] # IDを取り出す
-    # user_prof = req.get("https://api.line.me/v2/bot/profile/"+) # 参加したメンバーのユーザ名を取得
-    # user_name = (user_prof.json())['displayName']
+    user_id = joined_user.user_id # IDを取り出す
+    user_prof = req.get("https://api.line.me/v2/bot/profile/"+str(user_id)).json() # 参加したメンバーのユーザ名を取得
+    user_name = user_prof['displayName'] # ユーザ名を取り出す
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=f"ようこそこの世界へ、僕たちは君を歓迎しよう {str(joined_user.user_id)} {str(type(joined_user))}")
+        TextSendMessage(text=f"ようこそこの世界へ、僕たちは君を歓迎しよう @{user_name}")
     )
 
 
