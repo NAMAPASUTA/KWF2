@@ -55,7 +55,7 @@ def handler_message(event:Event):
     # user_name = (user_prof.json())['displayName']
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=f"ようこそこの世界へ、僕たちは君を歓迎しよう {joined_user} {type(joined_user)}")
+        TextSendMessage(text=f"ようこそこの世界へ、僕たちは君を歓迎しよう {str(joined_user)} {str(type(joined_user))}")
     )
 
 
