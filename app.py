@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 import os
+import requests as req
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -48,9 +49,10 @@ def handler_message(event):
 # 新しく参加したユーザに特定のメッセージを送信
 @handler.add(MemberJoinedEvent)
 def handler_message(event):
+    joined_user = req.get(f"https://api.line.me/v2/bot/profile/{event.joined.members[0]['userId']}") # 参加したメンバーのユーザ名を取得
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=f"Hello, {event.joined.members}")
+        TextSendMessage(text=f"ようこそこの世界へ、僕たちは君を歓迎しよう @{joined_user}")
     )
 
 
