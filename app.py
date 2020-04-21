@@ -6,7 +6,7 @@ from linebot import (
     LineBotApi, WebhookHandler
 )
 from linebot.exceptions import (
-    InvalidSignatureError
+    InvalidSignatureError, LineBotApiError
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, MemberJoinedEvent, Event
@@ -51,7 +51,11 @@ def handler_message(event):
 def handler_message(event:Event):
     joined_user = event.joined.members[0] # 参加したメンバーのデータ
     user_id = joined_user.user_id # IDを取り出す
-    user_prof = req.get("https://api.line.me/v2/bot/profile/"+str(user_id)).json() # 参加したメンバーのユーザ名を取得
+    try:
+        user_prof = line_bot_api.get_profile(user_id=user_id) # 参加したメンバーのユーザ名を取得
+    except LineBotApiError: # データの取得に失敗した場合
+        line_bot_api.reply_message(event.reply_token, text="ユーザデータを取得できませんでした")
+        pass
     user_name = user_prof['displayName'] # ユーザ名を取り出す
     line_bot_api.reply_message(
         event.reply_token,
