@@ -2,6 +2,9 @@
 from flask import Flask, request, abort
 import os
 import requests as req
+import json, twconfig
+from requests_oauthlib import OAuth1Session
+from functools import reduce
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -10,8 +13,18 @@ from linebot.exceptions import (
     InvalidSignatureError, LineBotApiError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, MemberJoinedEvent, Event
+    MessageEvent, TextMessage, TextSendMessage, MemberJoinedEvent, Event, TextSendMessage, MessageEvent
 ) # イベントをimport
+
+# Twitter configuration
+CK = twconfig.CONSUMER_KEY
+CS = twconfig.CONSUMER_SECRET
+AT = twconfig.ACCESS_TOKEN
+ATS = twconfig.ACCESS_SECRET
+twitter = OAuth1Session(CK, CS, AT, ATS)
+
+url = "https://api.twitter.com/1.1/trends/available.json"
+res = twitter.get(url, 1)
 
 app = Flask(__name__)
 
@@ -54,6 +67,22 @@ def handler_message(event:Event):
         event.reply_token,
         TextSendMessage(text=f"{str(user_prof.display_name)}さん\nようこそこの学校の光へ、僕たちは君を歓迎しよう")
     )
+
+# トレンドを取得
+@handler.add(MessageEvent)
+def handler_message(event:Event):
+    if res.status_code == 200:
+        topics = json.loads(res.text)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=f"{str(topics)}")
+        )
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="Failed to get topics")
+        )
+
 
 
 if __name__ == "__main__":
