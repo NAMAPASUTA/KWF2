@@ -51,7 +51,7 @@ def callback():
     return 'OK'
 
 # handlerにオプションを付加して処理を付け加える
-
+"""
 # 新しく参加したユーザに特定のメッセージを送信
 @handler.add(MemberJoinedEvent)
 def handler_message(event:Event):
@@ -66,7 +66,7 @@ def handler_message(event:Event):
         event.reply_token,
         TextSendMessage(text=f"{str(user_prof.display_name)}さん\nようこそこの学校の光へ、僕たちは君を歓迎しよう")
     )
-
+"""
 # トレンドを取得
 @handler.add(MessageEvent, message=TextMessage)
 def get_topic(event:Event):
