@@ -70,19 +70,26 @@ def handler_message(event:Event):
     )
 
 # トレンドを取得
-@handler.add(MessageEvent)
+@handler.add(MessageEvent, message=TextMessage)
 def handler_message(event:Event):
-    if res.status_code == 200:
-        topics = json.loads(res.text)
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=f"{str(topics)}")
-        )
+    if event.message.text == 'topic':
+        if res.status_code == 200:
+            topics = json.loads(res.text)
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=f"{str(topics)}")
+            )
+        else:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Failed to get topics")
+            )
     else:
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="Failed to get topics")
+            TextSendMessage(text=event.message.text)
         )
+
 
 
 
