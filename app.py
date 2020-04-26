@@ -24,7 +24,8 @@ ATS = twconfig.ACCESS_SECRET
 twitter = OAuth1Session(CK, CS, AT, ATS)
 
 url = "https://api.twitter.com/1.1/trends/available.json"
-res = twitter.get(url, 1)
+params = {'count': 1}
+res = twitter.get(url, params)
 
 app = Flask(__name__)
 
