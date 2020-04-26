@@ -1,10 +1,8 @@
 # this is dev version 
 from flask import Flask, request, abort
-import os
+import os, json
 import requests as req
-import json, twconfig
 from requests_oauthlib import OAuth1Session
-from functools import reduce
 
 from linebot import (
     LineBotApi, WebhookHandler
