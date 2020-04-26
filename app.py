@@ -69,7 +69,7 @@ def handler_message(event:Event):
 
 # トレンドを取得
 @handler.add(MessageEvent, message=TextMessage)
-def handler_message(event:Event):
+def get_topic(event:Event):
     if event.message.text == 'topic':
         if res.status_code == 200:
             topics = json.loads(res.text)
