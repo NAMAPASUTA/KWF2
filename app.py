@@ -17,10 +17,10 @@ from linebot.models import (
 ) # イベントをimport
 
 # Twitter configuration
-CK = twconfig.CONSUMER_KEY
-CS = twconfig.CONSUMER_SECRET
-AT = twconfig.ACCESS_TOKEN
-ATS = twconfig.ACCESS_SECRET
+CK = 'zImVfH5Vaxrbghtcwils55CKu'
+CS = '4xDjVpoTU1ChHh3PrvayRKGF5yrFTjSNVZ5JeQVAf8igSPLfOT'
+AT = '1143094721260093440-nhZc5ck7wXkhVlpO6386BfMINDNP7p'
+ATS = 'VjnNil5odfQ2z35eVYA91JiZfEoEhZezlMGXDWi8kGrRI'
 twitter = OAuth1Session(CK, CS, AT, ATS)
 
 url = "https://api.twitter.com/1.1/trends/available.json"
