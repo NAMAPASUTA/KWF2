@@ -60,7 +60,7 @@ def handler_message(event:Event):
     try:
         user_prof = line_bot_api.get_profile(user_id=user_id) # 参加したメンバーのユーザ名を取得
     except LineBotApiError: # データの取得に失敗した場合
-        line_bot_api.reply_message(event.reply_token, text="ユーザデータを取得できませんでした")
+        line_bot_api.reply_message(event.reply_token, messages="ユーザデータを取得できませんでした")
     # user_name = user_prof['displayName'] # ユーザ名を取り出す
     line_bot_api.reply_message(
         event.reply_token,
