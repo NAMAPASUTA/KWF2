@@ -59,12 +59,11 @@ def handler_message(event:Event):
 @handler.add(MessageEvent, message=TextMessage)
 def response(event:Event):
     msg = event.text
-    if msg != "":
-        if resp(msg) != "":
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=resp(msg))
-            )
+    if resp(msg) != "":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=resp(msg))
+        )
     else:
         print("Unknown keyword.")
         line_bot_api.reply_message(
