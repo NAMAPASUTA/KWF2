@@ -2,7 +2,6 @@
 from flask import Flask, request, abort
 import os, json
 import requests as req
-from requests_oauthlib import OAuth1Session
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -13,17 +12,6 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, MemberJoinedEvent, Event, TextSendMessage, MessageEvent
 ) # イベントをimport
-
-# Twitter configuration
-configs = json.load(open("config.json"))
-CK = configs["TW_KEY"]
-CS = configs["TW_SECRET"]
-AT = configs["TW_ACCESS_TOKEN"]
-ATS = configs["TW_ACCESS_SECRET"]
-twitter = OAuth1Session(CK, CS, AT, ATS)
-
-url = "https://api.twitter.com/1.1/trends/available.json"
-res = twitter.get(url)
 
 app = Flask(__name__)
 
@@ -67,21 +55,25 @@ def handler_message(event:Event):
         TextSendMessage(text=f"{str(user_prof.display_name)}さん\nようこそこの学校の光へ、僕たちは君を歓迎しよう")
     )
 """
-# トレンドを取得
+# キーワードに反応
 @handler.add(MessageEvent, message=TextMessage)
-def get_topic(event:Event):
-    if res.status_code == 200:
-        topics = json.loads(res.text)
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=f"{str(topics)}")
-        )
-    else:
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="Failed to get topics")
-        )
+def response(event:Event):
+    msg = event.text
+    if msg != "":
+        if resp(msg) != "":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=f"{}")
+            )
 
+# メッセージを生成
+def resp(msg:str):
+    if "やすゆき" in msg:
+        return "ほーら"
+    elif "なぜぇ" in msg:
+        return "ぉおかしいでしょおぉ"
+    else:
+        return ""
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT"))
