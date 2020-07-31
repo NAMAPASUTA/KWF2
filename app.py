@@ -63,7 +63,7 @@ def response(event:Event):
         if resp(msg) != "":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=f"{resp(msg)}")
+                TextSendMessage(text=resp(msg))
             )
 
 # メッセージを生成
