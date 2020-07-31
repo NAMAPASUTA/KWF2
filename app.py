@@ -65,6 +65,12 @@ def response(event:Event):
                 event.reply_token,
                 TextSendMessage(text=resp(msg))
             )
+    else:
+        print("Unknown keyword.")
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="すみません、よくわかりません")
+        )
 
 # メッセージを生成
 def resp(msg:str):
